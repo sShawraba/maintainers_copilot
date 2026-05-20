@@ -1,0 +1,61 @@
+2026-05-20 20:28:16,338 - INFO - ======================================================================
+2026-05-20 20:28:16,339 - INFO - Starting issue processing pipeline
+2026-05-20 20:28:16,339 - INFO - ======================================================================
+2026-05-20 20:28:16,339 - INFO - Loading issues from data/pandas_closed_issues.jsonl...
+2026-05-20 20:28:17,051 - INFO - Loaded 25297 total issues from file
+2026-05-20 20:28:17,056 - INFO - Filtered 0 PRs and 0 open issues
+2026-05-20 20:28:17,774 - INFO - Saved 25297 issues to data/all_closed_non_pr_issues.jsonl
+2026-05-20 20:28:17,799 - INFO - Classification dataset: 14177 issues | RAG corpus: 25297 issues | Skipped (no labels): 2348 | Skipped (unmappable): 8772
+2026-05-20 20:28:38,748 - INFO - Temporal split: train=9923, val=2127, test=2127
+2026-05-20 20:28:38,751 - INFO - Train dates: 2011-06-14T14:06:14Z to 2022-12-08T17:09:14Z
+2026-05-20 20:28:38,752 - INFO - Val dates: 2022-12-08T18:26:04Z to 2024-05-19T18:43:06Z
+2026-05-20 20:28:38,753 - INFO - Test dates: 2024-05-19T18:44:18Z to 2026-05-20T16:04:52Z
+2026-05-20 20:28:39,411 - INFO - Saved 14177 issues to data/classification/classification_ready.jsonl
+2026-05-20 20:28:39,930 - INFO - Saved 9923 issues to data/classification/train.jsonl
+2026-05-20 20:28:40,074 - INFO - Saved 2127 issues to data/classification/val.jsonl
+2026-05-20 20:28:40,210 - INFO - Saved 2127 issues to data/classification/test.jsonl
+2026-05-20 20:28:41,538 - INFO - Saved 25297 issues to data/rag_corpus/issues.jsonl
+2026-05-20 20:28:41,557 - INFO - Saved label analysis to data/label_analysis.json
+2026-05-20 20:31:21,056 - INFO - ======================================================================
+2026-05-20 20:31:21,056 - INFO - Starting issue processing pipeline
+2026-05-20 20:31:21,056 - INFO - ======================================================================
+2026-05-20 20:31:21,056 - INFO - Loading issues from data/pandas_closed_issues.jsonl...
+2026-05-20 20:31:21,584 - INFO - Loaded 25297 total issues from file
+2026-05-20 20:31:21,590 - INFO - Filtered 0 PRs and 0 open issues
+2026-05-20 20:31:22,172 - INFO - Saved 25297 issues to data/all_closed_non_pr_issues.jsonl
+2026-05-20 20:31:22,199 - INFO - Classification dataset: 15747 issues | RAG corpus: 25297 issues | Skipped (no labels): 2348 | Skipped (unmappable): 7202
+2026-05-20 20:31:43,022 - INFO - Temporal split: train=11022, val=2362, test=2363
+2026-05-20 20:31:43,025 - INFO - Train dates: 2011-06-14T14:06:14Z to 2022-08-22T20:36:24Z
+2026-05-20 20:31:43,026 - INFO - Val dates: 2022-08-23T00:14:18Z to 2024-03-12T17:27:26Z
+2026-05-20 20:31:43,027 - INFO - Test dates: 2024-03-15T21:43:33Z to 2026-05-20T16:04:52Z
+2026-05-20 20:31:43,571 - INFO - Saved 15747 issues to data/classification/classification_ready.jsonl
+2026-05-20 20:31:43,926 - INFO - Saved 11022 issues to data/classification/train.jsonl
+2026-05-20 20:31:44,035 - INFO - Saved 2362 issues to data/classification/val.jsonl
+2026-05-20 20:31:44,149 - INFO - Saved 2363 issues to data/classification/test.jsonl
+2026-05-20 20:31:45,002 - INFO - Saved 25297 issues to data/rag_corpus/issues.jsonl
+2026-05-20 20:31:45,018 - INFO - Saved label analysis to data/label_analysis.json
+2026-05-20 21:32:52,043 - INFO - ======================================================================
+2026-05-20 21:32:52,046 - INFO - Starting issue processing pipeline
+2026-05-20 21:32:52,046 - INFO - ======================================================================
+2026-05-20 21:32:52,046 - INFO - Loading issues from data/pandas_closed_issues.jsonl...
+2026-05-20 21:32:52,812 - INFO - Loaded 25297 total issues from file
+2026-05-20 21:32:52,819 - INFO - Filtered 0 PRs and 0 open issues
+2026-05-20 21:32:53,632 - INFO - Saved 25297 issues to data/all_closed_non_pr_issues.jsonl
+2026-05-20 21:32:53,662 - INFO - Classification dataset: 15747 issues | RAG corpus: 25297 issues | Skipped (no labels): 2348 | Skipped (unmappable): 7202
+2026-05-20 21:33:16,824 - INFO - Class 'bug': train=6434, val=1379, test=1379
+2026-05-20 21:33:16,826 - INFO - Class 'feature': train=1927, val=413, test=414
+2026-05-20 21:33:16,827 - INFO - Class 'docs': train=1561, val=335, test=335
+2026-05-20 21:33:16,827 - INFO - Class 'question': train=1099, val=235, test=236
+2026-05-20 21:33:16,828 - INFO - Stratified temporal split: train=11021, val=2362, test=2364
+2026-05-20 21:33:16,831 - INFO - TRAIN class distribution: {'bug': 6434, 'feature': 1927, 'docs': 1561, 'question': 1099}
+2026-05-20 21:33:16,832 - INFO - VAL class distribution: {'bug': 1379, 'feature': 413, 'docs': 335, 'question': 235}
+2026-05-20 21:33:16,834 - INFO - TEST class distribution: {'bug': 1379, 'feature': 414, 'docs': 335, 'question': 236}
+2026-05-20 21:33:16,838 - INFO - Train dates: 2011-06-14T14:06:14Z to 2023-01-12T21:07:05Z
+2026-05-20 21:33:16,839 - INFO - Val dates: 2020-09-08T12:45:23Z to 2024-08-30T18:09:50Z
+2026-05-20 21:33:16,841 - INFO - Test dates: 2022-01-20T23:14:04Z to 2026-05-20T16:04:52Z
+2026-05-20 21:33:17,511 - INFO - Saved 15747 issues to data/classification/classification_ready.jsonl
+2026-05-20 21:33:18,008 - INFO - Saved 11021 issues to data/classification/train.jsonl
+2026-05-20 21:33:18,156 - INFO - Saved 2362 issues to data/classification/val.jsonl
+2026-05-20 21:33:18,358 - INFO - Saved 2364 issues to data/classification/test.jsonl
+2026-05-20 21:33:19,525 - INFO - Saved 25297 issues to data/rag_corpus/issues.jsonl
+2026-05-20 21:33:19,544 - INFO - Saved label analysis to data/label_analysis.json
