@@ -8,5 +8,17 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Data files
 *.json
 *.jsonl
+
+# environment variables.env
+.env
+
+# Logs
+logs/
+*.log       
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
