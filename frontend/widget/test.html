@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copilot Widget - Simple Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 16px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .info {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .code {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        .features {
+            list-style: none;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: '✓';
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .status {
+            margin-top: 24px;
+            padding: 16px;
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            border-radius: 4px;
+            color: #065f46;
+            font-size: 14px;
+        }
+
+        .center-text {
+            text-align: center;
+            margin-top: 24px;
+            color: #999;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Widget Test Page</h1>
+        <p class="subtitle">Simple test to verify widget integration</p>
+
+        <div class="info">
+            ℹ️ The widget should appear in the <strong>bottom-right corner</strong> of this page.
+            Click the floating button to open the chat.
+        </div>
+
+        <h2 style="font-size: 18px; margin: 24px 0 12px 0; color: #333;">Features to Test:</h2>
+        <ul class="features">
+            <li>Widget toggle button appears</li>
+            <li>Chat window opens/closes</li>
+            <li>Can type messages</li>
+            <li>Receives API responses</li>
+            <li>Displays sources</li>
+            <li>Responsive on mobile</li>
+        </ul>
+
+        <div class="info">
+            <strong>Troubleshooting:</strong><br>
+            If widget doesn't appear, check:<br>
+            • Browser console (F12) for errors<br>
+            • Network tab to verify script loaded<br>
+            • API endpoint is reachable<br>
+            • CORS headers configured
+        </div>
+
+        <div class="status">
+            ✓ Widget is active and ready for testing
+        </div>
+
+        <div class="center-text">
+            <p>Open DevTools (F12) to debug if needed</p>
+        </div>
+    </div>
+
+    <!-- LOAD THE WIDGET -->
+    <!-- Using local dev server -->
+    <!-- Note: Port may vary (5173, 5174, etc.) - dev server will show the actual port -->
+    <script type="module">
+        // For dev, we need to import it as a module
+        import ChatbotWidget from 'http://localhost:5174/src/widget.jsx?t=' + Date.now();
+        
+        // Wait for widget initialization
+        setTimeout(() => {
+            console.log('Initializing widget...');
+            
+            if (typeof window.MaintainersCopilotWidget !== 'undefined') {
+                window.MaintainersCopilotWidget.init({
+                    widgetId: 'test-widget',
+                    apiUrl: 'http://localhost:8000',
+                    position: 'bottom-right',
+                    theme: 'light'
+                });
+                console.log('✓ Widget initialized successfully');
+            } else {
+                console.error('✗ Widget library not found. Make sure widget.js loaded.');
+            }
+        }, 500);
+    </script>
+
+    <!-- Or for built version, use this instead: -->
+    <!-- <script src="http://localhost:5174/dist/widget.js"></script> -->
+    <!-- <script>
+        window.MaintainersCopilotWidget.init({
+            widgetId: 'test-widget',
+            apiUrl: 'http://localhost:8000',
+            position: 'bottom-right',
+            theme: 'light'
+        });
+    </script> -->
+</body>
+</html>

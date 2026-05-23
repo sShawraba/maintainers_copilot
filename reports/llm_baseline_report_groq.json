@@ -1,0 +1,15 @@
+{
+  "model": "Groq llama-3.3-70b-versatile (zero-shot)",
+  "samples_used": 10,
+  "accuracy": 0.1,
+  "macro_f1": 0.06060606060606061,
+  "per_class_f1": {
+    "bug": 0.0,
+    "feature": 0.0,
+    "docs": 0.0,
+    "question": 0.18181818181818182
+  },
+  "latency_ms": 2282.548827699793,
+  "cost_usd": 0.0,
+  "total_tokens": 7886
+}

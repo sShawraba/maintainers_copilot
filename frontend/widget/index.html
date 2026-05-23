@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintainers Copilot Widget - Test</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 40px;
+        max-width: 700px;
+        width: 100%;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 16px;
+        font-size: 28px;
+      }
+
+      .subtitle {
+        color: #666;
+        margin-bottom: 24px;
+        font-size: 16px;
+      }
+
+      .section {
+        margin: 24px 0;
+        padding: 16px;
+        background: #f0f4ff;
+        border-left: 4px solid #667eea;
+        border-radius: 4px;
+        color: #333;
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      .features {
+        list-style: none;
+        margin: 16px 0;
+        padding: 0;
+      }
+
+      .features li {
+        padding: 8px 0;
+        color: #555;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .features li::before {
+        content: '✓';
+        color: #667eea;
+        font-weight: bold;
+        margin-right: 8px;
+      }
+
+      .status {
+        margin-top: 24px;
+        padding: 16px;
+        background: #d1fae5;
+        border-left: 4px solid #10b981;
+        border-radius: 4px;
+        color: #065f46;
+        font-size: 14px;
+      }
+
+      .debug-info {
+        background: #f5f5f5;
+        padding: 12px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 12px;
+        color: #666;
+        margin: 16px 0;
+        overflow-x: auto;
+      }
+
+      footer {
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid #e5e7eb;
+        text-align: center;
+        color: #999;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>🤖 Widget Test</h1>
+      <p class="subtitle">Testing embeddable chatbot widget</p>
+
+      <div class="section">
+        👉 The widget should appear in the <strong>bottom-right corner</strong> of this page.
+        Click the blue floating button to test it!
+      </div>
+
+      <div>
+        <h2 style="font-size: 16px; margin: 20px 0 12px 0; color: #333;">What to test:</h2>
+        <ul class="features">
+          <li>Click the floating button</li>
+          <li>Chat window opens</li>
+          <li>Type a message</li>
+          <li>Message sends to API</li>
+          <li>Response displays</li>
+        </ul>
+      </div>
+
+      <div class="section" style="background: #fff3cd; border-left-color: #ffc107; color: #856404;">
+        <strong>💡 Having issues?</strong><br/>
+        • Open DevTools (F12) to check console<br/>
+        • Check Network tab for API calls<br/>
+        • Verify your backend is running on port 8000
+      </div>
+
+      <div class="status">
+        ✓ Widget initialization in progress...
+      </div>
+
+      <div class="debug-info">
+        Dev server: http://localhost:5174<br/>
+        API endpoint: http://localhost:8000/api/chat
+      </div>
+
+      <footer>
+        <p>Maintainers Copilot Widget v1.0.0</p>
+      </footer>
+    </div>
+
+    <!-- INITIALIZE THE WIDGET -->
+    <script type="module">
+      import React from 'react';
+      import ReactDOM from 'react-dom/client';
+      import ChatbotWidget from './src/components/ChatbotWidget.jsx';
+      import './src/styles/widget.css';
+
+      console.log('Loading widget...');
+
+      // Expose global API
+      window.MaintainersCopilotWidget = {
+        init: function(config = {}) {
+          console.log('Initializing with config:', config);
+          
+          const widgetId = config.widgetId || 'default-widget';
+          const apiUrl = config.apiUrl || 'http://localhost:8000';
+          const position = config.position || 'bottom-right';
+          const theme = config.theme || 'light';
+          const containerId = config.containerId || `widget-${widgetId}`;
+
+          // Create container
+          let container = document.getElementById(containerId);
+          if (!container) {
+            container = document.createElement('div');
+            container.id = containerId;
+            container.className = `copilot-widget-container copilot-${position} copilot-theme-${theme}`;
+            document.body.appendChild(container);
+            console.log('Created container:', containerId);
+          }
+
+          // Render
+          try {
+            const root = ReactDOM.createRoot(container);
+            root.render(
+              React.createElement(ChatbotWidget, {
+                widgetId,
+                apiUrl,
+                position,
+                theme,
+                onClose: config.onClose
+              })
+            );
+            console.log('✓ Widget rendered successfully');
+          } catch (error) {
+            console.error('Error rendering widget:', error);
+          }
+
+          return container;
+        }
+      };
+
+      // Auto-init
+      window.addEventListener('load', () => {
+        console.log('Page loaded, initializing widget');
+        setTimeout(() => {
+          window.MaintainersCopilotWidget.init({
+            widgetId: 'demo-widget',
+            apiUrl: 'http://localhost:8000',
+            position: 'bottom-right',
+            theme: 'light'
+          });
+        }, 100);
+      });
+    </script>
+  </body>
+</html>

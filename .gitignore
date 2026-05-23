@@ -1,12 +1,76 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
-
 # Virtual environments
-.venv
-*.json
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Model files (large)
+models/classifier/*.safetensors
+models/classifier/*.bin
+models/classifier/pytorch_model.bin
+models/classifier/model.safetensors
+*.pt
+*.pth
+
+# Downloaded Hugging Face cache (optional)
+.cache/
+~/.cache/huggingface/
+
+# Data files (large)
+data/
 *.jsonl
+*.parquet
+*.csv
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Docker artifacts
+*.tar
+docker-compose.override.yml
+
+# Test outputs
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local configuration
+alembic/versions/*.pyc
+alembic/versions/__pycache__/
+
+# Widget build (if any)
+widget/dist/
+widget/node_modules/
+
+# MinIO data (if local)
+minio_data/
+
+# Vault data
+vault_data/
+
+# Postgres data
+postgres_data/
+
+# Streamlit secrets
+.streamlit/secrets.toml
