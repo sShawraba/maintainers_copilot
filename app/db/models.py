@@ -4,6 +4,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 from pgvector.sqlalchemy import Vector
 import enum
+from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
+from sqlalchemy import Boolean, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 Base = declarative_base()
 
@@ -16,6 +19,15 @@ class MemoryTypeEnum(str, enum.Enum):
     SEMANTIC = "semantic"
     PROCEDURAL = "procedural"
 
+class User(SQLAlchemyBaseUserTable[int], Base):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    email: Mapped[str] = mapped_column(String(length=320), unique=True, index=True)
+    hashed_password: Mapped[str] = mapped_column(String(length=1024))
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    is_superuser: Mapped[bool] = mapped_column(Boolean, default=False)
+    is_verified: Mapped[bool] = mapped_column(Boolean, default=False)
+    role: Mapped[str] = mapped_column(String, default="user")  # "user" or "admin"
 class RAGChunk(Base):
     __tablename__ = "rag_chunks"
 

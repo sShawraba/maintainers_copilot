@@ -14,6 +14,93 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  vault:
+    image: hashicorp/vault:latest
+    cap_add:
+      - IPC_LOCK
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root
+      VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
+    ports:
+      - "8200:8200"
+    volumes:
+      - vault_data:/vault/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "vault", "status"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    command: alembic upgrade head
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/maintainers_copilot
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: "no"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/maintainers_copilot
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      VAULT_ADDR: http://vault:8200
+      VAULT_TOKEN: root
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      HF_TOKEN: ${HF_TOKEN}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      vault:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    networks:
+      - app-network
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      API_URL: http://api:8000
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   postgres_data:
+  vault_data:

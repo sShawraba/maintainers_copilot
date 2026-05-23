@@ -4,15 +4,12 @@ from sqlalchemy.orm import sessionmaker, Session
 from app.db.models import Base
 import os
 
-# Get database URL from environment or Vault later
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@db:5432/maintainers_copilot")
+SYNC_DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/maintainers_copilot"
+sync_engine = create_engine(SYNC_DATABASE_URL)
+SyncSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=sync_engine)
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-def get_db() -> Session:
-    """Dependency for FastAPI to get DB session."""
-    db = SessionLocal()
+def get_sync_db():
+    db = SyncSessionLocal()
     try:
         yield db
     finally:
@@ -20,4 +17,4 @@ def get_db() -> Session:
 
 def init_db():
     """Create tables (useful for initial setup, but Alembic is preferred)."""
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=sync_engine)

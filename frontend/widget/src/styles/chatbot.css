@@ -1,0 +1,30 @@
+/* Additional chatbot-specific styles */
+
+/* Ensure no conflicts with user's CSS */
+.copilot-widget * {
+  box-sizing: border-box;
+}
+
+.copilot-widget button {
+  all: revert;
+  font-family: inherit;
+}
+
+.copilot-widget input {
+  all: revert;
+  font-family: inherit;
+}
+
+.copilot-widget a {
+  all: revert;
+  font-family: inherit;
+}
+
+/* Remove default margins */
+.copilot-widget ul,
+.copilot-widget li,
+.copilot-widget p,
+.copilot-widget h3 {
+  all: revert;
+  font-family: inherit;
+}
